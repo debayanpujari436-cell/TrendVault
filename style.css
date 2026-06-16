@@ -291,4 +291,7 @@ ul {
   .col-4 {
     flex-basis: 100%;
   }
+  .logo img{
+    width: 200px;
+  }
 }
