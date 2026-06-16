@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TrendVault</title>
+    <title>TrendVault - Products</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -17,81 +17,55 @@
     />
   </head>
   <body>
-    <div class="header">
-      <div class="container">
-        <div class="navbar">
-          <div class="logo">
-            <img
-              src="assets/images/logo.png"
-              alt="TrendVault Logo"
-              width="125px"
-            />
-          </div>
-          <nav>
-            <ul id="MenuItems">
-              <li><a href="index.html" class="active">Home</a></li>
-              <li><a href="products.html" class="active">Products</a></li>
-              <li><a href="#" class="active">About</a></li>
-              <li><a href="#" class="active">Contact</a></li>
-              <li><a href="#" class="active">Account</a></li>
-            </ul>
-          </nav>
+    <div class="container">
+      <div class="navbar">
+        <div class="logo">
           <img
-            src="assets/images/cart.png"
-            alt="Cart Icon"
-            width="30px"
-            height="30px"
-            style="cursor: pointer"
-          />
-          <img
-            src="assets/images/menu.png"
-            alt="Menu Icon"
-            class="menu-icon"
-            onclick="menutoggle()"
+            src="assets/images/logo.png"
+            alt="TrendVault Logo"
+            width="125px"
           />
         </div>
-        <div class="row">
-          <div class="col-2">
-            <h1>
-              Give Your Workout <br />
-              A New Style!
-            </h1>
-            <p>
-              Discover the latest trends in fashion and lifestyle. Find <br />
-              the perfect pieces for your style and confidence.
-            </p>
-            <a href="#" class="btn">Explore Now &#8594;</a>
-          </div>
-          <div class="col-2">
-            <img src="assets/images/image1.png" alt="Fitness Image" />
-          </div>
-        </div>
+        <nav>
+          <ul id="MenuItems">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="products.html" class="active">Products</a></li>
+            <li><a href="#" class="active">About</a></li>
+            <li><a href="#" class="active">Contact</a></li>
+            <li><a href="#" class="active">Account</a></li>
+          </ul>
+        </nav>
+        <img
+          src="assets/images/cart.png"
+          alt="Cart Icon"
+          width="30px"
+          height="30px"
+          style="cursor: pointer"
+        />
+        <img
+          src="assets/images/menu.png"
+          alt="Menu Icon"
+          class="menu-icon"
+          onclick="menutoggle()"
+        />
       </div>
     </div>
-    <!--------------Featured Categories-------------->
-    <div class="categories">
-      <div class="small-container">
-        <div class="row">
-          <div class="col-3">
-            <img src="assets/images/category-1.jpg" alt="Category 1" />
-          </div>
-          <div class="col-3">
-            <img src="assets/images/category-2.jpg" alt="Category 2" />
-          </div>
-          <div class="col-3">
-            <img src="assets/images/category-3.jpg" alt="Category 3" />
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--------------Featured Products-------------->
     <div class="small-container">
-      <h2 class="title">Featured Products</h2>
+      <div class="row row-2">
+        <h2>All Products</h2>
+        <select>
+          <option>Default Sorting</option>
+          <option>Sort by Price</option>
+          <option>Sort by Popularity</option>
+          <option>Sort by Rating</option>
+          <option>Sort by Sale</option>
+        </select>
+      </div>
       <div class="row">
         <div class="col-4">
-          <a href="product-details.html">
-            <img src="assets/images/product-1.jpg" alt="Product 1" />
-          </a>
+          <a href="product-details.html"
+            ><img src="assets/images/product-1.jpg" alt="Product 1"
+          /></a>
           <h4>Round-Neck T-Shirt</h4>
           <div class="rating">
             <i class="fa fa-star"></i>
@@ -139,7 +113,6 @@
           <p>$79.99</p>
         </div>
       </div>
-      <h2 class="title">Latest Products</h2>
       <div class="row">
         <div class="col-4">
           <img src="assets/images/product-5.jpg" alt="Product 5" />
@@ -240,111 +213,12 @@
           <p>$84.99</p>
         </div>
       </div>
-    </div>
-    <!--------------------offer-------------------->
-    <div class="offer">
-      <div class="small-container">
-        <div class="row">
-          <div class="col-2">
-            <img
-              src="assets/images/exclusive.png"
-              alt="Exclusive Offer"
-              class="offer-img"
-            />
-          </div>
-          <div class="col-2">
-            <p>Available Only On TrendVault</p>
-            <h1>FAsT Connect Band Pro</h1>
-            <small>
-              Stay connected and track your fitness goals with the latest. FAsT
-              Connect Band Pro. Monitor your heart rate, sleep patterns, and
-              more with this sleek and stylish wearable. </small
-            ><br />
-            <a href="#" class="btn">Buy Now &#8594;</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--------------------testimonial-------------------->
-    <div class="testimonial">
-      <div class="small-container">
-        <h2 class="title">Customer Testimonials</h2>
-        <div class="row">
-          <div class="col-3">
-            <i class="fa fa-quote-left"></i>
-            <p>
-              TrendVault has completely transformed my fitness journey. The
-              products are top-notch, and the customer service is exceptional. I
-              highly recommend it!
-            </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-            </div>
-            <img src="assets/images/user-1.png" alt="User 1" />
-            <h3>Elizabeth Swanson</h3>
-          </div>
-          <div class="col-3">
-            <i class="fa fa-quote-left"></i>
-            <p>
-              Top quality products and excellent customer service! TrendVault
-              has made my fitness journey so much more enjoyable. I can't
-              recommend it enough!
-            </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-half-o"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <img src="assets/images/user-2.png" alt="User 2" />
-            <h3>Oscar Johnson</h3>
-          </div>
-          <div class="col-3">
-            <i class="fa fa-quote-left"></i>
-            <p>
-              Recently purchased a set of track pants from TrendVault, and I
-              couldn't be happier. The quality is outstanding, and the delivery
-              was prompt. Highly recommend!
-            </p>
-            <div class="rating">
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star"></i>
-              <i class="fa fa-star-o"></i>
-            </div>
-            <img src="assets/images/user-3.png" alt="User 3" />
-            <h3>Lily Anderson</h3>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!--------------------brands-------------------->
-    <div class="brands">
-      <div class="small-container">
-        <h2 class="title">Our Sponsors</h2>
-        <div class="row">
-          <div class="col-5">
-            <img src="assets/images/logo-godrej.png" alt="Brand 1" />
-          </div>
-          <div class="col-5">
-            <img src="assets/images/logo-oppo.png" alt="Brand 2" />
-          </div>
-          <div class="col-5">
-            <img src="assets/images/logo-coca-cola.png" alt="Brand 3" />
-          </div>
-          <div class="col-5">
-            <img src="assets/images/logo-philips.png" alt="Brand 4" />
-          </div>
-          <div class="col-5">
-            <img src="assets/images/logo-paypal.png" alt="Brand 5" />
-          </div>
-        </div>
+      <div class="page-btn">
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+        <span>&#8594;</span>
       </div>
     </div>
     <!--------------------footer-------------------->
