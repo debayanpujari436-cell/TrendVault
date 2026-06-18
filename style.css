@@ -453,6 +453,10 @@ th:last-child {
   border-color: #0c1624;
 }
 @media only screen and (max-width: 800px) {
+  .navbar {
+    position: relative;
+    z-index: 10;
+  }
   nav ul {
     position: absolute;
     top: 70px;
@@ -460,7 +464,9 @@ th:last-child {
     background: #333;
     width: 100%;
     overflow: hidden;
+    max-height: 0;
     transition: max-height 0.5s;
+    z-index: 20;
   }
   nav ul li {
     display: block;
@@ -474,6 +480,8 @@ th:last-child {
   .menu-icon {
     display: block;
     cursor: pointer;
+    position: relative;
+    z-index: 30;
   }
 }
 @media only screen and (max-width: 600px) {
