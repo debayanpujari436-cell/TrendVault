@@ -334,6 +334,57 @@ input:focus {
   flex-basis: 24%;
   cursor: pointer;
 }
+.cart-page{
+  margin: 80px auto;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart-info{
+  display: flex;
+  flex-wrap: wrap;
+}
+th{
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background: #1d3757;
+  font-weight: normal;
+}
+td{
+  padding: 10px 5px;
+}
+td input{
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+  border: 1px solid #1d3757;
+}
+td a{
+  color: #1d3757;
+  font-size: 12px;
+}
+td img{
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+.total-price{
+  display: flex;
+  justify-content: flex-end;
+}
+.total-price table{
+  border-top: 3px solid #1d3757;
+  width: 100%;
+  max-width: 400px;
+}
+td:last-child{
+  text-align: right;
+}
+th:last-child{
+  text-align: right;
+}
 @media only screen and (max-width: 800px) {
   nav ul {
     position: absolute;
@@ -379,5 +430,8 @@ input:focus {
   }
   .logo img {
     width: 200px;
+  }
+  .cart-info p{
+    display: none;
   }
 }
