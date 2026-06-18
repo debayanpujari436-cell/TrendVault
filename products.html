@@ -35,7 +35,7 @@
             <li><a href="#" class="active">Account</a></li>
           </ul>
         </nav>
-        <a href="cart.html">
+        <a href="cart.html" class="cart-link">
           <img
             src="assets/images/cart.png"
             alt="Cart Icon"
@@ -43,6 +43,7 @@
             height="30px"
             style="cursor: pointer"
           />
+          <span id="cartCount" class="cart-count hidden">0</span>
         </a>
         <img
           src="assets/images/menu.png"
@@ -55,166 +56,16 @@
     <div class="small-container">
       <div class="row row-2">
         <h2>All Products</h2>
-        <select>
-          <option>Default Sorting</option>
-          <option>Sort by Price</option>
-          <option>Sort by Popularity</option>
-          <option>Sort by Rating</option>
-          <option>Sort by Sale</option>
+        <select id="sortDropdown">
+          <option value="default">Default Sorting</option>
+          <option value="price-low">Sort by Price: Low to High</option>
+          <option value="price-high">Sort by Price: High to Low</option>
+          <option value="popularity">Sort by Popularity</option>
+          <option value="rating">Sort by Rating</option>
+          <option value="sale">Sort by Sale</option>
         </select>
       </div>
-      <div class="row">
-        <div class="col-4">
-          <a href="product-details.html"
-            ><img src="assets/images/product-1.jpg" alt="Product 1"
-          /></a>
-          <h4>Round-Neck T-Shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$49.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-2.jpg" alt="Product 2" />
-          <h4>HRX Running Shoes</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$29.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-3.jpg" alt="Product 3" />
-          <h4>Grey Running Pants</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$89.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-4.jpg" alt="Product 4" />
-          <h4>Puma Blue T-Shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <p>$79.99</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <img src="assets/images/product-5.jpg" alt="Product 5" />
-          <h4>Grey Off-White Sneakers</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$34.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-6.jpg" alt="Product 6" />
-          <h4>Black Puma T-Shirt</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$39.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-7.jpg" alt="Product 7" />
-          <h4>HRX Socks</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$14.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-8.jpg" alt="Product 8" />
-          <h4>Fossil Black Watch</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <p>$99.99</p>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-4">
-          <img src="assets/images/product-9.jpg" alt="Product 9" />
-          <h4>Roadster Watch</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <p>$149.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-10.jpg" alt="Product 10" />
-          <h4>HRX Sports Shoes</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$29.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-11.jpg" alt="Product 11" />
-          <h4>Grey Running Shoes</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$24.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-12.jpg" alt="Product 12" />
-          <h4>Black Nike Track Pants</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$84.99</p>
-        </div>
-      </div>
+      <div id="productsContainer"></div>
       <div class="page-btn">
         <span>1</span>
         <span>2</span>
@@ -271,6 +122,214 @@
           MenuItems.style.maxHeight = "200px";
         } else {
           MenuItems.style.maxHeight = "0px";
+        }
+      }
+    </script>
+    <!--------------------Products Database & Sorting-------------------->
+    <script>
+      // Product Database
+      const products = [
+        {
+          id: 1,
+          name: "Round-Neck T-Shirt",
+          price: 49.99,
+          rating: 4.5,
+          popularity: 45,
+          sales: 150,
+        },
+        {
+          id: 2,
+          name: "HRX Running Shoes",
+          price: 29.99,
+          rating: 4,
+          popularity: 88,
+          sales: 220,
+        },
+        {
+          id: 3,
+          name: "Grey Running Pants",
+          price: 89.99,
+          rating: 3.5,
+          popularity: 92,
+          sales: 95,
+        },
+        {
+          id: 4,
+          name: "Puma Blue T-Shirt",
+          price: 79.99,
+          rating: 5,
+          popularity: 55,
+          sales: 180,
+        },
+        {
+          id: 5,
+          name: "Grey Off-White Sneakers",
+          price: 34.99,
+          rating: 4,
+          popularity: 78,
+          sales: 140,
+        },
+        {
+          id: 6,
+          name: "Black Puma T-Shirt",
+          price: 39.99,
+          rating: 4,
+          popularity: 62,
+          sales: 125,
+        },
+        {
+          id: 7,
+          name: "HRX Socks",
+          price: 14.99,
+          rating: 3.5,
+          popularity: 85,
+          sales: 310,
+        },
+        {
+          id: 8,
+          name: "Fossil Black Watch",
+          price: 99.99,
+          rating: 5,
+          popularity: 42,
+          sales: 78,
+        },
+        {
+          id: 9,
+          name: "Roadster Watch",
+          price: 149.99,
+          rating: 5,
+          popularity: 89,
+          sales: 65,
+        },
+        {
+          id: 10,
+          name: "HRX Sports Shoes",
+          price: 29.99,
+          rating: 4,
+          popularity: 70,
+          sales: 200,
+        },
+        {
+          id: 11,
+          name: "Grey Running Shoes",
+          price: 24.99,
+          rating: 3.5,
+          popularity: 91,
+          sales: 185,
+        },
+        {
+          id: 12,
+          name: "Black Nike Track Pants",
+          price: 84.99,
+          rating: 4.5,
+          popularity: 58,
+          sales: 110,
+        },
+      ];
+
+      // Function to display stars
+      function displayStars(rating) {
+        let stars = "";
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+
+        for (let i = 0; i < fullStars; i++) {
+          stars += '<i class="fa fa-star"></i>';
+        }
+        if (hasHalfStar) {
+          stars += '<i class="fa fa-star-half-o"></i>';
+        }
+        for (let i = fullStars + (hasHalfStar ? 1 : 0); i < 5; i++) {
+          stars += '<i class="fa fa-star-o"></i>';
+        }
+        return stars;
+      }
+
+      // Render products
+      function renderProducts(productsToRender) {
+        const container = document.getElementById("productsContainer");
+        container.innerHTML = "";
+
+        let html = "";
+        for (let i = 0; i < productsToRender.length; i += 4) {
+          html += '<div class="row">';
+          for (let j = i; j < i + 4 && j < productsToRender.length; j++) {
+            const product = productsToRender[j];
+            const stars = displayStars(product.rating);
+            html += `
+              <div class="col-4">
+                <a href="product-details.html?id=${product.id}"><img src="assets/images/product-${product.id}.jpg" alt="Product ${product.id}" /></a>
+                <h4>${product.name}</h4>
+                <div class="rating">
+                  ${stars}
+                </div>
+                <p>$${product.price.toFixed(2)}</p>
+              </div>
+            `;
+          }
+          html += "</div>";
+        }
+        container.innerHTML = html;
+      }
+
+      // Sorting functions
+      function sortProducts(sortType) {
+        let sortedProducts = [...products];
+
+        switch (sortType) {
+          case "price-low":
+            sortedProducts.sort((a, b) => a.price - b.price);
+            break;
+          case "price-high":
+            sortedProducts.sort((a, b) => b.price - a.price);
+            break;
+          case "popularity":
+            sortedProducts.sort((a, b) => b.popularity - a.popularity);
+            break;
+          case "rating":
+            sortedProducts.sort((a, b) => b.rating - a.rating);
+            break;
+          case "sale":
+            sortedProducts.sort((a, b) => b.sales - a.sales);
+            break;
+          case "default":
+          default:
+            sortedProducts = [...products];
+            break;
+        }
+
+        renderProducts(sortedProducts);
+      }
+
+      // Event listener for sort dropdown
+      document
+        .getElementById("sortDropdown")
+        .addEventListener("change", function () {
+          sortProducts(this.value);
+        });
+
+      // Initialize products on page load
+      window.addEventListener("DOMContentLoaded", function () {
+        renderProducts(products);
+        updateCartCount();
+      });
+    </script>
+    <script>
+      function getCart() {
+        const storedCart = localStorage.getItem("trendvaultCart");
+        return storedCart ? JSON.parse(storedCart) : [];
+      }
+
+      function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cartCount");
+        if (!cartCount) return;
+        cartCount.textContent = count;
+        if (count > 0) {
+          cartCount.classList.remove("hidden");
+        } else {
+          cartCount.classList.add("hidden");
         }
       }
     </script>

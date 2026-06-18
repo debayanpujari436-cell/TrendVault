@@ -36,7 +36,7 @@
               <li><a href="#" class="active">Account</a></li>
             </ul>
           </nav>
-          <a href="cart.html">
+          <a href="cart.html" class="cart-link">
             <img
               src="assets/images/cart.png"
               alt="Cart Icon"
@@ -44,8 +44,9 @@
               height="30px"
               style="cursor: pointer"
             />
+            <span id="cartCount" class="cart-count hidden">0</span>
           </a>
-          
+
           <img
             src="assets/images/menu.png"
             alt="Menu Icon"
@@ -400,6 +401,27 @@
           MenuItems.style.maxHeight = "0px";
         }
       }
+    </script>
+    <script>
+      function getCart() {
+        const storedCart = localStorage.getItem("trendvaultCart");
+        return storedCart ? JSON.parse(storedCart) : [];
+      }
+
+      function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cartCount");
+        if (!cartCount) return;
+        cartCount.textContent = count;
+        if (count > 0) {
+          cartCount.classList.remove("hidden");
+        } else {
+          cartCount.classList.add("hidden");
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", updateCartCount);
     </script>
   </body>
 </html>

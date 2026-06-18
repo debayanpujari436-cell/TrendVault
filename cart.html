@@ -35,7 +35,7 @@
             <li><a href="#" class="active">Account</a></li>
           </ul>
         </nav>
-        <a href="cart.html">
+        <a href="cart.html" class="cart-link">
           <img
             src="assets/images/cart.png"
             alt="Cart Icon"
@@ -43,6 +43,7 @@
             height="30px"
             style="cursor: pointer"
           />
+          <span id="cartCount" class="cart-count hidden">0</span>
         </a>
         <img
           src="assets/images/menu.png"
@@ -52,87 +53,43 @@
         />
       </div>
     </div>
-  <!---------------Cart Item Details---------->
+    <!---------------Cart Item Details---------->
     <div class="small-container cart-page">
-      <table>
-        <tr>
-          <th>Product</th>
-          <th>Quantity</th>
-          <th>Subtotal</th>
-        </tr>
-        <tr>
-          <td>
-            <div class="cart-info">
-              <img
-                src="assets/images/buy-1.jpg"
-                alt="Product Image"
-                width="100px"
-              />
-              <div>
-                <p>Round-Neck T-Shirt</p>
-                <small>Price: $49.99</small><br />
-                <a href="#">Remove</a>
-              </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$49.99</td>
-        </tr>
-        <tr>
-          <td>
-            <div class="cart-info">
-              <img
-                src="assets/images/buy-2.jpg"
-                alt="Product Image"
-                width="100px"
-              />
-              <div>
-                <p>HRX Running Shoes</p>
-                <small>Price: $29.99</small><br />
-                <a href="#">Remove</a>
-              </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$29.99</td>
-        </tr>
-        <tr>
-          <td>
-            <div class="cart-info">
-              <img
-                src="assets/images/buy-3.jpg"
-                alt="Product Image"
-                width="100px"
-              />
-              <div>
-                <p>Grey Running Pants</p>
-                <small>Price: $89.99</small><br />
-                <a href="#">Remove</a>
-              </div>
-            </div>
-          </td>
-          <td><input type="number" value="1" /></td>
-          <td>$89.99</td>
-        </tr>
+      <table id="cartTable">
+        <thead>
+          <tr>
+            <th>Products</th>
+            <th>Quantity</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody id="cartBody"></tbody>
       </table>
 
       <div class="total-price">
         <table>
           <tr>
             <td>Subtotal</td>
-            <td>$169.97</td>
+            <td id="cartSubtotal">$0.00</td>
           </tr>
           <tr>
             <td>Tax (10%)</td>
-            <td>$16.99</td>
+            <td id="cartTax">$0.00</td>
           </tr>
           <tr>
             <td>Total</td>
-            <td>$186.96</td>
+            <td id="cartTotal">$0.00</td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <a href="checkout.html" class="btn"
+                >Proceed to Checkout &#8594;</a
+              >
+            </td>
           </tr>
         </table>
       </div>
-      </div>
+    </div>
     <!--------------------footer-------------------->
     <div class="footer">
       <div class="container">
@@ -183,6 +140,115 @@
           MenuItems.style.maxHeight = "0px";
         }
       }
+    </script>
+    <script>
+      function getCart() {
+        const storedCart = localStorage.getItem("trendvaultCart");
+        return storedCart ? JSON.parse(storedCart) : [];
+      }
+
+      function saveCart(cart) {
+        localStorage.setItem("trendvaultCart", JSON.stringify(cart));
+      }
+
+      function formatPrice(value) {
+        return `$${value.toFixed(2)}`;
+      }
+
+      function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cartCount");
+        if (cartCount) {
+          cartCount.textContent = count;
+          if (count > 0) {
+            cartCount.classList.remove("hidden");
+          } else {
+            cartCount.classList.add("hidden");
+          }
+        }
+      }
+
+      function renderCart() {
+        const cartBody = document.getElementById("cartBody");
+        const cart = getCart();
+        cartBody.innerHTML = "";
+
+        if (!cart.length) {
+          cartBody.innerHTML = `
+            <tr>
+              <td colspan="3" style="text-align:center; padding: 20px;">Your cart is empty.</td>
+            </tr>
+          `;
+          document.getElementById("cartSubtotal").textContent = formatPrice(0);
+          document.getElementById("cartTax").textContent = formatPrice(0);
+          document.getElementById("cartTotal").textContent = formatPrice(0);
+          updateCartCount();
+          return;
+        }
+
+        let subtotal = 0;
+
+        cart.forEach((item) => {
+          const itemSubtotal = item.price * item.quantity;
+          subtotal += itemSubtotal;
+          cartBody.innerHTML += `
+            <tr>
+              <td>
+                <div class="cart-info">
+                  <a href="product-details.html?id=${item.id}">
+                    <img src="${item.image}" alt="${item.name}" width="100px" />
+                  </a>
+                  <div>
+                    <p>${item.name}</p>
+                    <small>Price: ${formatPrice(item.price)}</small><br />
+                    <button type="button" class="remove-item" data-key="${item.key}">Remove</button>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <input type="number" min="1" value="${item.quantity}" class="cart-quantity" data-key="${item.key}" />
+              </td>
+              <td>${formatPrice(itemSubtotal)}</td>
+            </tr>
+          `;
+        });
+
+        const tax = subtotal * 0.1;
+        const total = subtotal + tax;
+
+        document.getElementById("cartSubtotal").textContent =
+          formatPrice(subtotal);
+        document.getElementById("cartTax").textContent = formatPrice(tax);
+        document.getElementById("cartTotal").textContent = formatPrice(total);
+
+        document.querySelectorAll(".cart-quantity").forEach((input) => {
+          input.addEventListener("change", function () {
+            const quantity = Math.max(1, parseInt(this.value, 10) || 1);
+            this.value = quantity;
+            const key = this.dataset.key;
+            const cart = getCart();
+            const item = cart.find((cartItem) => cartItem.key === key);
+            if (item) {
+              item.quantity = quantity;
+              saveCart(cart);
+              renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll(".remove-item").forEach((button) => {
+          button.addEventListener("click", function () {
+            const key = this.dataset.key;
+            const cart = getCart().filter((item) => item.key !== key);
+            saveCart(cart);
+            renderCart();
+          });
+        });
+        updateCartCount();
+      }
+
+      window.addEventListener("DOMContentLoaded", renderCart);
     </script>
   </body>
 </html>

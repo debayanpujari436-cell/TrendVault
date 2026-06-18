@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Details</title>
+    <title id="pageTitle">Product Details</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,7 +35,7 @@
             <li><a href="#" class="active">Account</a></li>
           </ul>
         </nav>
-        <a href="cart.html">
+        <a href="cart.html" class="cart-link">
           <img
             src="assets/images/cart.png"
             alt="Cart Icon"
@@ -43,8 +43,9 @@
             height="30px"
             style="cursor: pointer"
           />
+          <span id="cartCount" class="cart-count hidden">0</span>
         </a>
-        
+
         <img
           src="assets/images/menu.png"
           alt="Menu Icon"
@@ -58,7 +59,7 @@
       <div class="row">
         <div class="col-2">
           <img
-            src="assets/images/gallery-1.jpg"
+            src="assets/images/product-1.jpg"
             alt="Product Image"
             width="100%"
             id="productImg"
@@ -70,6 +71,7 @@
                 alt="Small Image 1"
                 width="100%"
                 class="small-img"
+                id="galleryImg1"
               />
             </div>
             <div class="small-img-col">
@@ -78,6 +80,7 @@
                 alt="Small Image 2"
                 width="100%"
                 class="small-img"
+                id="galleryImg2"
               />
             </div>
             <div class="small-img-col">
@@ -86,6 +89,7 @@
                 alt="Small Image 3"
                 width="100%"
                 class="small-img"
+                id="galleryImg3"
               />
             </div>
             <div class="small-img-col">
@@ -94,31 +98,35 @@
                 alt="Small Image 4"
                 width="100%"
                 class="small-img"
+                id="galleryImg4"
               />
             </div>
           </div>
         </div>
         <div class="col-2">
-          <p>Home / T-Shirt</p>
-          <h1>Round-Neck T-Shirt</h1>
-          <h4>$49.99</h4>
-          <select>
+          <p id="productCategory">Home / Product</p>
+          <h1 id="productName">Product Name</h1>
+          <h4 id="productPrice">$0.00</h4>
+          <select id="productOptions">
             <option>Select Size</option>
-            <option>Size: S</option>
-            <option>Size: M</option>
-            <option>Size: L</option>
-            <option>Size: XL</option>
-            <option>Size: XXL</option>
           </select>
-          <input type="number" id="num" value="1" min="1" max="15" step="1" />
-          <a href="#" class="btn">Add to Cart</a>
+          <input
+            type="number"
+            id="productQuantity"
+            value="1"
+            min="1"
+            max="15"
+            step="1"
+          />
+          <div class="cart-popup-wrap">
+            <button type="button" id="addToCartBtn" class="btn">
+              Add to Cart
+            </button>
+            <span id="cartPopup" class="cart-popup">Added to cart</span>
+          </div>
           <h3>Product Details <i class="fa fa-indent"></i></h3>
           <br />
-          <p>
-            This round-neck T-shirt is made from high-quality cotton, offering
-            comfort and style. Perfect for casual wear, it features a classic
-            fit and is available in various sizes.
-          </p>
+          <p id="productDesc">Product description goes here</p>
         </div>
       </div>
     </div>
@@ -131,55 +139,8 @@
     </div>
     <!--------------------Products------------------->
     <div class="small-container">
-      <div class="row">
-        <div class="col-4">
-          <img src="assets/images/product-9.jpg" alt="Product 9" />
-          <h4>Roadster Watch</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-          </div>
-          <p>$149.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-10.jpg" alt="Product 10" />
-          <h4>HRX Sports Shoes</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$29.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-11.jpg" alt="Product 11" />
-          <h4>Grey Running Shoes</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-o"></i>
-            <i class="fa fa-star-o"></i>
-          </div>
-          <p>$24.99</p>
-        </div>
-        <div class="col-4">
-          <img src="assets/images/product-12.jpg" alt="Product 12" />
-          <h4>Black Nike Track Pants</h4>
-          <div class="rating">
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star"></i>
-            <i class="fa fa-star-half-o"></i>
-          </div>
-          <p>$84.99</p>
-        </div>
+      <div class="row" id="relatedProducts">
+        <!-- Related products will be loaded here dynamically -->
       </div>
     </div>
     <!--------------------footer-------------------->
@@ -221,6 +182,397 @@
         <p class="copyright">Copyright 2026 - TrendVault</p>
       </div>
     </div>
+    <!--------------------Product Data & JavaScript-------------------->
+    <script>
+      // Product Database
+      const products = {
+        1: {
+          id: 1,
+          name: "Round-Neck T-Shirt",
+          category: "T-Shirt",
+          price: 49.99,
+          image: "assets/images/product-1.jpg",
+          detailImage: "assets/images/gallery-1.jpg",
+          description:
+            "This round-neck T-shirt is made from high-quality cotton, offering comfort and style. Perfect for casual wear, it features a classic fit and is available in various sizes.",
+          options: ["Size: S", "Size: M", "Size: L", "Size: XL", "Size: XXL"],
+          rating: 4.5,
+          relatedProducts: [9, 10, 11, 12],
+        },
+        2: {
+          id: 2,
+          name: "HRX Running Shoes",
+          category: "Running Shoes",
+          price: 29.99,
+          image: "assets/images/product-2.jpg",
+          detailImage: "assets/images/gallery-2.jpg",
+          description:
+            "The HRX Running Shoes are designed for comfort and performance during your workouts. Featuring advanced cushioning technology and breathable materials, these shoes provide excellent support for running and athletic activities. Available in various sizes for the perfect fit.",
+          options: [
+            "Size: 6",
+            "Size: 7",
+            "Size: 8",
+            "Size: 9",
+            "Size: 10",
+            "Size: 11",
+            "Size: 12",
+          ],
+          rating: 4,
+          relatedProducts: [1, 3, 4, 10],
+        },
+        3: {
+          id: 3,
+          name: "Grey Running Pants",
+          category: "Running Pants",
+          price: 89.99,
+          image: "assets/images/product-3.jpg",
+          detailImage: "assets/images/gallery-3.jpg",
+          description:
+            "Stay active in style with our Grey Running Pants. Crafted from premium breathable fabric, these pants offer exceptional comfort and flexibility for all your athletic pursuits. Features moisture-wicking technology to keep you dry during intense workouts. Perfect for running, gym sessions, or casual wear.",
+          options: [
+            "Size: XS",
+            "Size: S",
+            "Size: M",
+            "Size: L",
+            "Size: XL",
+            "Size: XXL",
+          ],
+          rating: 3.5,
+          relatedProducts: [1, 2, 4, 12],
+        },
+        4: {
+          id: 4,
+          name: "Puma Blue T-Shirt",
+          category: "T-Shirt",
+          price: 79.99,
+          image: "assets/images/product-4.jpg",
+          detailImage: "assets/images/gallery-4.jpg",
+          description:
+            "Elevate your casual wardrobe with this stunning Puma Blue T-Shirt. Designed with premium comfort in mind, this vibrant blue tee features the iconic Puma branding and is perfect for sports enthusiasts and fashion-forward individuals. Made from high-quality material that's soft to the touch and durable for everyday wear.",
+          options: ["Size: S", "Size: M", "Size: L", "Size: XL", "Size: XXL"],
+          rating: 5,
+          relatedProducts: [1, 6, 2, 5],
+        },
+        5: {
+          id: 5,
+          name: "Grey Off-White Sneakers",
+          category: "Sneakers",
+          price: 34.99,
+          image: "assets/images/product-5.jpg",
+          detailImage: "assets/images/gallery-1.jpg",
+          description:
+            "Step up your sneaker game with our Grey Off-White Sneakers. These stylish and versatile sneakers blend contemporary design with premium comfort. Featuring a sleek grey and off-white color scheme, they're perfect for casual outings, gym sessions, or streetwear styling. Built with quality materials for durability and long-lasting wear.",
+          options: [
+            "Size: 6",
+            "Size: 7",
+            "Size: 8",
+            "Size: 9",
+            "Size: 10",
+            "Size: 11",
+            "Size: 12",
+          ],
+          rating: 4,
+          relatedProducts: [2, 10, 11, 4],
+        },
+        6: {
+          id: 6,
+          name: "Black Puma T-Shirt",
+          category: "T-Shirt",
+          price: 39.99,
+          image: "assets/images/product-6.jpg",
+          detailImage: "assets/images/gallery-2.jpg",
+          description:
+            "The Black Puma T-Shirt is an essential wardrobe staple that combines timeless style with athletic comfort. Featuring the iconic Puma logo and a sleek black finish, this tee is perfect for any occasion. Made from premium cotton blend fabric, it offers superior softness and breathability. Great for layering or wearing on its own.",
+          options: ["Size: S", "Size: M", "Size: L", "Size: XL", "Size: XXL"],
+          rating: 4,
+          relatedProducts: [1, 4, 3, 7],
+        },
+        7: {
+          id: 7,
+          name: "HRX Socks",
+          category: "Socks",
+          price: 14.99,
+          image: "assets/images/product-7.jpg",
+          detailImage: "assets/images/gallery-3.jpg",
+          description:
+            "Elevate your comfort with HRX Socks, designed for all-day wear and athletic activities. These high-quality socks feature advanced moisture-wicking technology to keep your feet dry and fresh. Made from premium fabric blend that ensures breathability and durability. Perfect for running, gym workouts, or everyday casual wear.",
+          options: ["Size: Free Size"],
+          rating: 3.5,
+          relatedProducts: [2, 10, 5, 11],
+        },
+        8: {
+          id: 8,
+          name: "Fossil Black Watch",
+          category: "Watches",
+          price: 99.99,
+          image: "assets/images/product-8.jpg",
+          detailImage: "assets/images/gallery-4.jpg",
+          description:
+            "The Fossil Black Watch is a timeless classic that combines sophistication with functionality. Featuring a sleek black dial and premium construction, this watch is perfect for both casual and formal occasions. The durable stainless steel case and comfortable strap make it an ideal accessory for everyday wear. A must-have for watch enthusiasts.",
+          options: ["Classic Black", "Leather Strap", "Metal Strap"],
+          rating: 5,
+          relatedProducts: [9, 1, 4, 2],
+        },
+        9: {
+          id: 9,
+          name: "Roadster Watch",
+          category: "Watches",
+          price: 149.99,
+          image: "assets/images/product-9.jpg",
+          detailImage: "assets/images/gallery-1.jpg",
+          description:
+            "Experience luxury and precision with the Roadster Watch. This premium timepiece features an elegant design with a precise quartz movement and sapphire crystal for durability. The sophisticated dial and premium band make it an excellent choice for special occasions or as a statement piece. Built to last and designed to impress.",
+          options: ["Silver Dial", "Black Dial", "Blue Dial"],
+          rating: 5,
+          relatedProducts: [8, 1, 4, 2],
+        },
+        10: {
+          id: 10,
+          name: "HRX Sports Shoes",
+          category: "Sports Shoes",
+          price: 29.99,
+          image: "assets/images/product-10.jpg",
+          detailImage: "assets/images/gallery-2.jpg",
+          description:
+            "Maximize your athletic performance with HRX Sports Shoes. Engineered with advanced technology and premium materials, these shoes provide superior support and stability for all your sports activities. The responsive cushioning system ensures comfort during intense training sessions. Perfect for basketball, badminton, or any high-impact sport.",
+          options: [
+            "Size: 6",
+            "Size: 7",
+            "Size: 8",
+            "Size: 9",
+            "Size: 10",
+            "Size: 11",
+            "Size: 12",
+          ],
+          rating: 4,
+          relatedProducts: [2, 5, 11, 7],
+        },
+        11: {
+          id: 11,
+          name: "Grey Running Shoes",
+          category: "Running Shoes",
+          price: 24.99,
+          image: "assets/images/product-11.jpg",
+          detailImage: "assets/images/gallery-3.jpg",
+          description:
+            "Get ready to run in style with our Grey Running Shoes. Designed for both beginners and experienced runners, these shoes offer an excellent balance of comfort and performance. The lightweight construction and responsive cushioning make every stride enjoyable. Perfect for morning jogs, training sessions, or casual athletic wear.",
+          rating: 3.5,
+          options: [
+            "Size: 6",
+            "Size: 7",
+            "Size: 8",
+            "Size: 9",
+            "Size: 10",
+            "Size: 11",
+            "Size: 12",
+          ],
+          relatedProducts: [2, 10, 5, 3],
+        },
+        12: {
+          id: 12,
+          name: "Black Nike Track Pants",
+          category: "Track Pants",
+          price: 84.99,
+          image: "assets/images/product-12.jpg",
+          detailImage: "assets/images/gallery-4.jpg",
+          description:
+            "Dominate your workouts with Black Nike Track Pants. Engineered with Nike's finest materials, these track pants deliver superior comfort and performance. The sleek black design works with any outfit, while the advanced fabric technology keeps you cool and dry. Perfect for training, casual wear, or traveling. A versatile essential for any athletic wardrobe.",
+          options: [
+            "Size: XS",
+            "Size: S",
+            "Size: M",
+            "Size: L",
+            "Size: XL",
+            "Size: XXL",
+          ],
+          rating: 4.5,
+          relatedProducts: [3, 2, 10, 1],
+        },
+      };
+
+      // Function to get URL parameter
+      function getProductId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return parseInt(urlParams.get("id")) || 1;
+      }
+
+      // Function to display stars
+      function displayStars(rating) {
+        let stars = "";
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 !== 0;
+
+        for (let i = 0; i < fullStars; i++) {
+          stars += '<i class="fa fa-star"></i>';
+        }
+        if (hasHalfStar) {
+          stars += '<i class="fa fa-star-half-o"></i>';
+        }
+        for (let i = fullStars + (hasHalfStar ? 1 : 0); i < 5; i++) {
+          stars += '<i class="fa fa-star-o"></i>';
+        }
+        return stars;
+      }
+
+      // Function to load product
+      function loadProduct() {
+        const productId = getProductId();
+        const product = products[productId];
+
+        if (!product) {
+          document.body.innerHTML = "<h2>Product not found</h2>";
+          return;
+        }
+
+        // Update page title
+        document.getElementById("pageTitle").textContent =
+          `${product.name} - TrendVault`;
+
+        // Calculate gallery image number for this product
+        const baseGalleryNum = (productId - 1) * 4 + 1;
+
+        // Update product details
+        document.getElementById("productImg").src =
+          `assets/images/gallery-${baseGalleryNum}.jpg`;
+        document.getElementById("productImg").alt = product.name;
+        document.getElementById("productCategory").textContent =
+          `Home / ${product.category}`;
+        document.getElementById("productName").textContent = product.name;
+        document.getElementById("productPrice").textContent =
+          `$${product.price.toFixed(2)}`;
+        document.getElementById("productDesc").textContent =
+          product.description;
+
+        // Update options dropdown
+        const optionsSelect = document.getElementById("productOptions");
+        optionsSelect.innerHTML =
+          "<option>Select " +
+          (product.category.includes("Shoes") ||
+          product.category.includes("Socks")
+            ? "Size"
+            : "Size") +
+          "</option>";
+        product.options.forEach((option) => {
+          const opt = document.createElement("option");
+          opt.textContent = option;
+          optionsSelect.appendChild(opt);
+        });
+
+        // Update quantity input default value
+        const quantityInput = document.getElementById("productQuantity");
+        if (quantityInput) {
+          quantityInput.value = 1;
+        }
+
+        // Update gallery images based on product ID
+        for (let i = 0; i < 4; i++) {
+          const galleryImg = document.getElementById(`galleryImg${i + 1}`);
+          if (galleryImg) {
+            galleryImg.src = `assets/images/gallery-${baseGalleryNum + i}.jpg`;
+            galleryImg.alt = `Product ${productId} Image ${i + 1}`;
+          }
+        }
+
+        // Load related products
+        const relatedProductsContainer =
+          document.getElementById("relatedProducts");
+        relatedProductsContainer.innerHTML = "";
+        product.relatedProducts.forEach((relatedId) => {
+          const relatedProduct = products[relatedId];
+          const stars = displayStars(relatedProduct.rating);
+          relatedProductsContainer.innerHTML += `
+            <div class="col-4">
+              <a href="product-details.html?id=${relatedProduct.id}"><img src="${relatedProduct.image}" alt="${relatedProduct.name}" /></a>
+              <h4>${relatedProduct.name}</h4>
+              <div class="rating">
+                ${stars}
+              </div>
+              <p>$${relatedProduct.price.toFixed(2)}</p>
+            </div>
+          `;
+        });
+      }
+
+      function getCart() {
+        const storedCart = localStorage.getItem("trendvaultCart");
+        return storedCart ? JSON.parse(storedCart) : [];
+      }
+
+      function saveCart(cart) {
+        localStorage.setItem("trendvaultCart", JSON.stringify(cart));
+      }
+
+      function updateCartCount() {
+        const cart = getCart();
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const cartCount = document.getElementById("cartCount");
+        if (cartCount) {
+          cartCount.textContent = count;
+          if (count > 0) {
+            cartCount.classList.remove("hidden");
+          } else {
+            cartCount.classList.add("hidden");
+          }
+        }
+      }
+
+      function showCartPopup() {
+        const popup = document.getElementById("cartPopup");
+        if (!popup) return;
+        popup.style.opacity = "1";
+        popup.style.transform = "translateX(0)";
+        setTimeout(() => {
+          popup.style.opacity = "0";
+        }, 2000);
+      }
+
+      function addToCart() {
+        const productId = getProductId();
+        const product = products[productId];
+        if (!product) {
+          return;
+        }
+
+        const quantity = Math.max(
+          1,
+          parseInt(document.getElementById("productQuantity").value, 10) || 1,
+        );
+        const option = document.getElementById("productOptions").value;
+        const selectedOption = option === "Select Size" ? "Default" : option;
+
+        const cart = getCart();
+        const itemKey = `${product.id}|${selectedOption}`;
+        const existingItem = cart.find((item) => item.key === itemKey);
+
+        if (existingItem) {
+          existingItem.quantity += quantity;
+        } else {
+          cart.push({
+            key: itemKey,
+            id: product.id,
+            name: product.name,
+            option: selectedOption,
+            price: product.price,
+            quantity,
+            image: `assets/images/buy-${product.id}.jpg`,
+          });
+        }
+
+        saveCart(cart);
+        updateCartCount();
+        showCartPopup();
+      }
+
+      // Load product on page load
+      loadProduct();
+      updateCartCount();
+
+      document
+        .getElementById("addToCartBtn")
+        .addEventListener("click", function () {
+          addToCart();
+        });
+    </script>
     <!--------------------js for toggle menu-------------------->
     <script>
       var MenuItems = document.getElementById("MenuItems");
@@ -245,14 +597,16 @@
       }
     </script>
     <script>
-      document.getElementById("num").addEventListener("input", function () {
-        if (this.value > 15) {
-          this.value = 15;
-        }
-        if (this.value < 1) {
-          this.value = 1;
-        }
-      });
+      document
+        .getElementById("productQuantity")
+        .addEventListener("input", function () {
+          if (this.value > 15) {
+            this.value = 15;
+          }
+          if (this.value < 1) {
+            this.value = 1;
+          }
+        });
     </script>
   </body>
 </html>
