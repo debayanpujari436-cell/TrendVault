@@ -30,7 +30,7 @@
           <ul id="MenuItems">
             <li><a href="index.html" class="active">Home</a></li>
             <li><a href="products.html" class="active">Products</a></li>
-            <li><a href="#" class="active">About</a></li>
+            <li><a href="about.html" class="active">About</a></li>
             <li><a href="#" class="active">Contact</a></li>
             <li><a href="account.html" class="active">Account</a></li>
           </ul>
@@ -192,12 +192,13 @@
         cart.forEach((item) => {
           const itemSubtotal = item.price * item.quantity;
           subtotal += itemSubtotal;
+          const itemImage = `assets/images/buy-${item.id}.jpg`;
           cartBody.innerHTML += `
             <tr>
               <td>
                 <div class="cart-info">
                   <a href="product-details.html?id=${item.id}">
-                    <img src="${item.image}" alt="${item.name}" width="100px" />
+                    <img src="${itemImage}" alt="${item.name}" width="100px" onerror="this.onerror=null;this.src='assets/images/buy-${item.id}.jpg'" />
                   </a>
                   <div>
                     <p>${item.name}</p>
